@@ -1,14 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Ball : MonoBehaviour {
 
-    private float bounceForce = 3f;
+    public static Ball Instance { get; private set; }
+    public event EventHandler<BallHitPlatformEventArgs> OnBallHitPlatform;
+
+    public class BallHitPlatformEventArgs : EventArgs {
+        public Vector3 position;
+        public Transform transform;
+    }
+
+    private readonly float bounceForce = 3f;
     private Rigidbody rb;
     private bool hasBounced = false;
 
     private void Awake() {
+        Instance = this;
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -21,6 +32,11 @@ public class Ball : MonoBehaviour {
         rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
 
         hasBounced = true;
+
+        OnBallHitPlatform?.Invoke(this, new BallHitPlatformEventArgs {
+            position = transform.position,
+            transform = collision.transform
+        });
     }
 
     private void OnCollisionExit(Collision collision) {
