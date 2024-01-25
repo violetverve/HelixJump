@@ -17,7 +17,16 @@ public class ScoreManager : MonoBehaviour {
     }
 
     private void Start() {
-        maxScore = HelixGameManager.Instance.GetPlatformsNumber();
+        maxScore = LevelManager.Instance.GetPlatformsNumber();
+
+        LevelManager.Instance.OnLevelChanged += LevelManager_OnLevelChanged;
+    }
+
+    private void LevelManager_OnLevelChanged(object sender, EventArgs e) {
+        maxScore = LevelManager.Instance.GetPlatformsNumber();
+        currentScore = 0;
+
+        OnScoreChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void IncrementScore() {
@@ -32,5 +41,9 @@ public class ScoreManager : MonoBehaviour {
 
     public int GetMaxScore() {
         return maxScore;
+    }
+
+    public float GetScoreNormalized() {
+        return (float)currentScore / maxScore;
     }
 }

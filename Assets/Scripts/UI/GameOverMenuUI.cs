@@ -13,8 +13,7 @@ public class GameOverMenuUI : MonoBehaviour {
 
     private void Awake() {
         startOverButton.onClick.AddListener(() => {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LevelManager.Instance.ResetCurrentLevel();
         });
     }
 

@@ -11,8 +11,7 @@ public class WinMenuUI : MonoBehaviour {
     private void Awake()  {
 
         nextLevelButton.onClick.AddListener(() => {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            LevelManager.Instance.LoadNextLevel();
         });
     }
 

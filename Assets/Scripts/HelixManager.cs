@@ -25,8 +25,23 @@ public class HelixManager : MonoBehaviour {
     private void Start() {
         yPos = transform.position.y;
 
-        numberOfMiddleLevels = HelixGameManager.Instance.GetPlatformsNumber();
+        numberOfMiddleLevels = LevelManager.Instance.GetPlatformsNumber();
 
+        LevelManager.Instance.OnLevelChanged += LevelManager_OnLevelChanged;
+        LevelManager.Instance.OnLevelReset += LevelManager_OnLevelReset;
+
+        SpawnLevels();
+    }
+
+    private void LevelManager_OnLevelChanged(object sender, System.EventArgs e) {
+        numberOfMiddleLevels = LevelManager.Instance.GetPlatformsNumber();
+
+        DestroyLevels();
+        SpawnLevels();
+    }
+
+    private void LevelManager_OnLevelReset(object sender, System.EventArgs e) {
+        DestroyLevels();
         SpawnLevels();
     }
 

@@ -21,13 +21,29 @@ public class Ball : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
-        
-        //HelixGameManager.Instance.OnGameOver += HelixGameManager_OnGameOver;
 
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
     }
 
+    private void Start() {
+        LevelManager.Instance.OnLevelChanged += LevelManager_OnLevelChanged;
+        LevelManager.Instance.OnLevelReset += LevelManager_OnLevelReset;
+    }
+
+    private void LevelManager_OnLevelChanged(object sender, System.EventArgs e) {
+        ResetBall();
+    }
+
+    private void LevelManager_OnLevelReset(object sender, System.EventArgs e) {
+        ResetBall();
+    }
+
+    private void ResetBall() {
+        transform.position = startPosition;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 
     private void OnCollisionEnter(Collision collision) {
         if (hasBounced) return;
