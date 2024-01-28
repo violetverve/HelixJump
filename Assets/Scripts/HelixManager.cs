@@ -33,6 +33,11 @@ public class HelixManager : MonoBehaviour {
         SpawnLevels();
     }
 
+    private void OnDestroy() {
+        LevelManager.Instance.OnLevelChanged -= LevelManager_OnLevelChanged;
+        LevelManager.Instance.OnLevelReset -= LevelManager_OnLevelReset;
+    }
+
     private void LevelManager_OnLevelChanged(object sender, System.EventArgs e) {
         numberOfMiddleLevels = LevelManager.Instance.GetPlatformsNumber();
 

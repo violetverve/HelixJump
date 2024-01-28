@@ -18,8 +18,10 @@ public class WinMenuUI : MonoBehaviour {
 
     private void Start() {
         HelixGameManager.Instance.OnLevelComplete += HelixGameManager_OnLevelComplete;
+
         Hide();
     }
+
 
     private void HelixGameManager_OnLevelComplete(object sender, System.EventArgs e) {
         Show();

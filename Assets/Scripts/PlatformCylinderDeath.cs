@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlatformCylinderDeath : MonoBehaviour {
     
     private void OnCollisionExit(Collision other) {
-        HelixGameManager.Instance.GameOver();
+        if (Ball.Instance.GetState() != Ball.State.Super) {
+            HelixGameManager.Instance.GameOver();
+        }
     }
 
 }
