@@ -428,7 +428,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.7
+  m_Time: 0.55
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -1248,7 +1248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9245283, g: 0.64247257, b: 0.099430345, a: 1}
+  m_Color: {r: 0, g: 0.6156863, b: 0.6039216, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2722,7 +2722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1885788932
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3111,7 +3111,7 @@ MonoBehaviour:
   - {fileID: 2371985516730573927, guid: bbc17250c82bc6849ba930acdf0f1910, type: 3}
   - {fileID: 7579788000415814207, guid: aa1b0d8fa4e61d1428a875cac10a5db1, type: 3}
   - {fileID: 3622617006696737328, guid: 3ddcfe3ca18ed7542a047d95678b7765, type: 3}
-  helixTopLevel: {fileID: 2371985516730573927, guid: bbc17250c82bc6849ba930acdf0f1910, type: 3}
+  helixTopLevel: {fileID: 2371985516730573927, guid: a10f8c6bd7ab31542b260f48de5a6cd2, type: 3}
   helixBottomLevel: {fileID: 2519232567490638034, guid: e2c74cdb97e38374d8622c65443cb15a, type: 3}
 --- !u!114 &1950296246
 MonoBehaviour:
@@ -3157,7 +3157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2110375573
 RectTransform:
   m_ObjectHideFlags: 0
