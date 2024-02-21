@@ -14,6 +14,8 @@ public class PlatformCylinderTrigger : MonoBehaviour {
         ScoreManager.Instance.IncrementScore();
 
         Ball.Instance.IncrementPlatformsPassedWithoutCollision();
+
+        PlatformsManager.Instance.IncrementPlatformIndex();
         
         platformDestruction.DestroyPlatform();
 

@@ -74,4 +74,8 @@ public class HelixManager : MonoBehaviour {
         }
     }
 
+    public float GetLevelDistance() {
+        return levelDistance;
+    }
+
 }
