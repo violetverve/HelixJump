@@ -9,6 +9,7 @@ public class BallVisual : MonoBehaviour {
     [SerializeField] private Material materialSuperSphere;
     [SerializeField] private Material materialNormalTrail;
     [SerializeField] private Material materialSuperTrail;
+    [SerializeField] private ParticleSystem hitPlatformParticleSystem;
 
     private Animator animator;
 
@@ -34,7 +35,8 @@ public class BallVisual : MonoBehaviour {
     private void Ball_OnBallHitPlatform(object sender, Ball.BallHitPlatformEventArgs e) {
         animator.SetTrigger(SQUASH_TRIGGER);
 
-        Debug.Log("Ball hit platform");
+        hitPlatformParticleSystem.transform.position = e.position;
+        hitPlatformParticleSystem.Play();
     }
 
     private void Ball_OnBallStateChanged(object sender, System.EventArgs e) {
