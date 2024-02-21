@@ -62,9 +62,7 @@ public class Ball : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if (rb.velocity.y > 0) {
-            rb.AddForce(Physics.gravity * rb.mass * (gravityMultiplier - 1));
-        }
+        rb.AddForce(Physics.gravity * rb.mass * (gravityMultiplier - 1));
     }
 
     private void OnCollisionEnter(Collision collision) {
