@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformDestructionTrigger : MonoBehaviour {
+public class PlatformBottomDestructionTrigger : MonoBehaviour {
 private PlatformDestruction platformDestruction;
 
     private void Awake() {
@@ -11,6 +11,8 @@ private PlatformDestruction platformDestruction;
 
     private void OnTriggerExit(Collider other) {
         
+        PlatformsManager.Instance.IncrementPlatformIndex();
+
         platformDestruction.DestroyPlatform();
 
         gameObject.SetActive(false);

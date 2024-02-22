@@ -24,7 +24,7 @@ public class PlatformsManager : MonoBehaviour {
     }
 
     public Vector3 GetCurrentPlatformPosition() {
-        return new Vector3(0, (currentPlatformIndex + 1) * -1 * 4, 0);
+        return new Vector3(0, currentPlatformIndex * -1 * 4, 0);
     }
 
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformDestruction : MonoBehaviour {
     private readonly float radius = 100f;
-    private readonly float explosionForce = 1000f;
+    private readonly float explosionForce = 1300f;
     private readonly float destroyDelay = 2f;
 
     [SerializeField] private Transform[] platformCylinderTransforms;

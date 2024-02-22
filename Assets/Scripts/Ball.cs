@@ -7,11 +7,6 @@ public class Ball : MonoBehaviour {
 
     public static Ball Instance { get; private set; }
 
-    public enum State {
-        Normal,
-        Super
-    }
-
     public event EventHandler<BallHitPlatformEventArgs> OnBallHitPlatform;
     public event EventHandler OnBallStateChanged;
     private Vector3 startPosition;
@@ -23,18 +18,22 @@ public class Ball : MonoBehaviour {
     [SerializeField] private float bounceForce = 4f;
     [SerializeField] private float gravityMultiplier = 6f;
 
+    private IBallState ballState;
     private Rigidbody rb;
-    private bool hasBounced = false;
     private int platformsPassedWithoutCollision = 0;
-    private State state = State.Normal;
     private int platformsPassedWithoutCollisionToSuper = 2;
     private Vector3 bounceDirection = Vector3.up;
-
+    
+    private float collisionCooldown = 0.2f;
+    private float lastCollisionTime = -1;
+    
     private void Awake() {
         Instance = this;
 
         rb = GetComponent<Rigidbody>();
         startPosition = transform.position;
+
+        ballState = NormalState.Instance;
     }
 
     private void Start() {
@@ -65,21 +64,18 @@ public class Ball : MonoBehaviour {
         rb.AddForce(Physics.gravity * rb.mass * (gravityMultiplier - 1));
     }
 
+
     private void OnCollisionEnter(Collision collision) {
-        if (hasBounced) return;
 
-        if (state == State.Super) {
-            collision.gameObject.GetComponentInParent<PlatformDestruction>().DestroyPlatform();
+        float timeSinceLastCollision = Time.time - lastCollisionTime;
+        if (timeSinceLastCollision < collisionCooldown) return;
 
-            platformsPassedWithoutCollision = 0;
-            state = State.Normal;
-            OnBallStateChanged?.Invoke(this, EventArgs.Empty);
+
+        ballState.HandleCollisionEnter(this, collision);
+
+        if (ballState is SuperState) {
+            return;
         }
-
-        rb.velocity = Vector3.zero;
-        rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
-
-        hasBounced = true;
 
         platformsPassedWithoutCollision = 0;
 
@@ -87,26 +83,36 @@ public class Ball : MonoBehaviour {
             position = transform.position,
             transform = collision.transform
         });
+
+        lastCollisionTime = Time.time;
     }
 
-    private void OnCollisionExit(Collision collision) {
-        hasBounced = false;
+    public void SetVelocity(Vector3 velocity) {
+        rb.velocity = velocity;
+    }
+
+    public void AddBounceForce() {
+        rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
     }
 
     public void IncrementPlatformsPassedWithoutCollision() {
         if (platformsPassedWithoutCollision == platformsPassedWithoutCollisionToSuper) {
             platformsPassedWithoutCollision++;
 
-            state = State.Super;
-            OnBallStateChanged?.Invoke(this, EventArgs.Empty);
+            SetState(ComboState.Instance);
         } 
         if (platformsPassedWithoutCollision < platformsPassedWithoutCollisionToSuper) {
             platformsPassedWithoutCollision++;
         }
     }
 
-    public State GetState() {
-        return state;
+    public void SetState(IBallState ballState) {
+        this.ballState = ballState;
+
+        OnBallStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public IBallState GetState() {
+        return ballState;
+    }
 }

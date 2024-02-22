@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class BallVisual : MonoBehaviour {
     private static string SQUASH_TRIGGER = "Squashed";
-    [SerializeField] private Material materialNormalSphere;
-    [SerializeField] private Material materialSuperSphere;
-    [SerializeField] private Material materialNormalTrail;
-    [SerializeField] private Material materialSuperTrail;
+    [SerializeField] private List<BallStateVisualSO> ballStateVisuals;
+
     [SerializeField] private ParticleSystem hitPlatformParticleSystem;
 
     private Animator animator;
@@ -22,14 +20,18 @@ public class BallVisual : MonoBehaviour {
 
         meshRenderer = GetComponent<MeshRenderer>();
         trailRenderer = GetComponent<TrailRenderer>();
-
-        meshRenderer.material = materialNormalSphere;
-        trailRenderer.material = materialNormalTrail;
     }
     
     private void Start() {
         Ball.Instance.OnBallStateChanged += Ball_OnBallStateChanged;
         Ball.Instance.OnBallHitPlatform += Ball_OnBallHitPlatform;
+
+        SetVisual(GetVisualByState(Ball.Instance.GetState()));
+    }
+
+    private void OnDestroy() {
+        Ball.Instance.OnBallStateChanged -= Ball_OnBallStateChanged;
+        Ball.Instance.OnBallHitPlatform -= Ball_OnBallHitPlatform;
     }
     
     private void Ball_OnBallHitPlatform(object sender, Ball.BallHitPlatformEventArgs e) {
@@ -40,14 +42,24 @@ public class BallVisual : MonoBehaviour {
     }
 
     private void Ball_OnBallStateChanged(object sender, System.EventArgs e) {
-        Ball.State state = Ball.Instance.GetState();
-        if (state ==  Ball.State.Normal) {
-            meshRenderer.material = materialNormalSphere;
-            trailRenderer.material = materialNormalTrail;
-        } else if (state ==  Ball.State.Super) {
-            meshRenderer.material = materialSuperSphere;
-            trailRenderer.material = materialSuperTrail;
+        IBallState ballState = Ball.Instance.GetState();
+
+        SetVisual(GetVisualByState(ballState));
+    }
+
+    private void SetVisual(BallStateVisualSO ballStateVisualSO) {
+        meshRenderer.material = ballStateVisualSO.ballMaterial;
+        trailRenderer.material = ballStateVisualSO.trailMaterial;
+    }
+
+    private BallStateVisualSO GetVisualByState(IBallState ballState) {
+        foreach (BallStateVisualSO ballStateVisual in ballStateVisuals) {
+            if (ballStateVisual.stateName == ballState.GetStateName()) {
+                return ballStateVisual;
+            }
         }
+
+        return null;
     }
 
 }
