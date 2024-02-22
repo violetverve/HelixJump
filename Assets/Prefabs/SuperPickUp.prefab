@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4171917366966020012}
   - component: {fileID: 5254884720759642722}
   m_Layer: 0
-  m_Name: SuperSuperPickUpVisual
+  m_Name: SuperPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3869799373454619820}
   - component: {fileID: 8418016715934811070}
   m_Layer: 0
-  m_Name: SuperSuperPickUp
+  m_Name: SuperPickUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
