@@ -13,13 +13,10 @@ public class SuperPickUpManager : MonoBehaviour {
     private float xPosition = 2.2f;
     private float zPosition = 0f;
     private int numberOfSuperPickUps = 2;
-    private float levelDistance;
 
 
     private void Start() {
         int numberofPlatforms = LevelManager.Instance.GetPlatformsNumber();
-
-        levelDistance = HelixManager.Instance.GetLevelDistance();
 
         maxPossibleIndex = numberofPlatforms - maxPossibleIndexOffset;
 
@@ -39,8 +36,9 @@ public class SuperPickUpManager : MonoBehaviour {
         }
 
         int platformIndex = Random.Range(minPossibleIndex, maxPossibleIndex);
+
+        float yPosition = PlatformsManager.Instance.GetYPosPlatformPosition(platformIndex);
         
-        float yPosition = -levelDistance * platformIndex;
         Vector3 superPickUpPosition = new Vector3(xPosition, yPosition + yOffset, zPosition);
 
         Transform superPickUpTransfrm = Instantiate(superPickUpTransform, superPickUpPosition, Quaternion.identity);

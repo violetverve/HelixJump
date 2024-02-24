@@ -23,8 +23,11 @@ public class PlatformsManager : MonoBehaviour {
     }
 
     public Vector3 GetCurrentPlatformPosition() {
-        return new Vector3(0, currentPlatformIndex * -1 * 4, 0);
+        return new Vector3(0, -currentPlatformIndex * HelixManager.Instance.GetLevelDistance(), 0);
     }
 
+    public float GetYPosPlatformPosition(int index) {
+        return -index * HelixManager.Instance.GetLevelDistance();
+    }
 
 }
