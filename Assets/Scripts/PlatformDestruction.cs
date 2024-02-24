@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlatformDestruction : MonoBehaviour {
-    private readonly float radius = 100f;
-    private readonly float explosionForce = 1300f;
-    private readonly float destroyDelay = 1f;
-
     [SerializeField] private Transform[] platformCylinderTransforms;
-    public void DestroyPlatform() {
+    private readonly float radius = 100f;
+
+    public void DestroyPlatform(float explosionForce = 700f, float destroyDelay = 0.75f) {
 
         Vector3 explosionPosition = transform.position;
 
@@ -26,6 +24,14 @@ public class PlatformDestruction : MonoBehaviour {
         }
 
         StartCoroutine(DestroyAfterDelay(gameObject, destroyDelay));
+    }
+
+    public void SetPlatformMaterial(Material material) {
+        for (int i = 0; i < platformCylinderTransforms.Length; i++) {
+            Transform platformTransform = platformCylinderTransforms[i];
+            Renderer renderer = platformTransform.gameObject.GetComponent<Renderer>();
+            renderer.material = material;
+        }
     }
 
     private IEnumerator DestroyAfterDelay(GameObject obj, float delay) {

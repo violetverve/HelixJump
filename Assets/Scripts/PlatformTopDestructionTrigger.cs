@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlatformTopDestructionTrigger : MonoBehaviour
 {
     private PlatformDestruction platformDestruction;
+    private float destructionForce = 1000f;
 
     private void Awake() {
         platformDestruction = GetComponentInParent<PlatformDestruction>();
@@ -12,11 +13,13 @@ public class PlatformTopDestructionTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other) {
 
-        if (Ball.Instance.GetState() == SuperState.Instance) {
-            
+        if (Ball.Instance.GetState() is SuperState && SuperState.Instance.IsDestroying()) {
+
             SuperState.Instance.IncrementPlatformsHitWithSuper();
 
-            platformDestruction.DestroyPlatform();
+            platformDestruction.SetPlatformMaterial(BallVisual.Instance.GetBallCurrentMaterial());
+
+            platformDestruction.DestroyPlatform(destructionForce);
 
             gameObject.SetActive(false);
         }

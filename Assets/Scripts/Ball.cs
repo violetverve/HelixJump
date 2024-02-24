@@ -9,7 +9,6 @@ public class Ball : MonoBehaviour {
 
     public event EventHandler<BallHitPlatformEventArgs> OnBallHitPlatform;
     public event EventHandler OnBallStateChanged;
-    private Vector3 startPosition;
 
     public class BallHitPlatformEventArgs : EventArgs {
         public Vector3 position;
@@ -30,7 +29,6 @@ public class Ball : MonoBehaviour {
         Instance = this;
 
         rb = GetComponent<Rigidbody>();
-        startPosition = transform.position;
 
         ballState = NormalState.Instance;
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 public class BallVisual : MonoBehaviour {
+    public static BallVisual Instance { get; private set; }
     private static string SQUASH_TRIGGER = "Squashed";
     [SerializeField] private List<BallStateVisualSO> ballStateVisuals;
 
@@ -16,6 +17,7 @@ public class BallVisual : MonoBehaviour {
     
 
     private void Awake() {
+        Instance = this;
         animator = GetComponent<Animator>();
 
         meshRenderer = GetComponent<MeshRenderer>();
@@ -60,6 +62,14 @@ public class BallVisual : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public Material GetBallNormalMaterial() {
+        return GetVisualByState(NormalState.Instance).ballMaterial;
+    }
+
+    public Material GetBallCurrentMaterial() {
+        return meshRenderer.material;
     }
 
 }

@@ -14,7 +14,6 @@ private PlatformDestruction platformDestruction;
             NormalState.Instance.IncrementPlatformsPassedWithoutCollision();
         }
 
-
         PlatformsManager.Instance.IncrementPlatformIndex();
 
         platformDestruction.DestroyPlatform();
