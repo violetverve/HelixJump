@@ -20,8 +20,7 @@ public class Ball : MonoBehaviour {
 
     private IBallState ballState;
     private Rigidbody rb;
-    private int platformsPassedWithoutCollision = 0;
-    private int platformsPassedWithoutCollisionToSuper = 2;
+
     private Vector3 bounceDirection = Vector3.up;
     
     private float collisionCooldown = 0.2f;
@@ -55,9 +54,8 @@ public class Ball : MonoBehaviour {
     }
 
     private void ResetBall() {
-        transform.position = startPosition;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+
+        ResetStates();
     }
 
     void FixedUpdate() {
@@ -77,8 +75,6 @@ public class Ball : MonoBehaviour {
             return;
         }
 
-        platformsPassedWithoutCollision = 0;
-
         OnBallHitPlatform?.Invoke(this, new BallHitPlatformEventArgs {
             position = transform.position,
             transform = collision.transform
@@ -95,17 +91,6 @@ public class Ball : MonoBehaviour {
         rb.AddForce(bounceDirection * bounceForce, ForceMode.Impulse);
     }
 
-    public void IncrementPlatformsPassedWithoutCollision() {
-        if (platformsPassedWithoutCollision == platformsPassedWithoutCollisionToSuper) {
-            platformsPassedWithoutCollision++;
-
-            SetState(ComboState.Instance);
-        } 
-        if (platformsPassedWithoutCollision < platformsPassedWithoutCollisionToSuper) {
-            platformsPassedWithoutCollision++;
-        }
-    }
-
     public void SetState(IBallState ballState) {
         this.ballState = ballState;
 
@@ -114,5 +99,10 @@ public class Ball : MonoBehaviour {
 
     public IBallState GetState() {
         return ballState;
+    }
+
+    private void ResetStates() {
+        NormalState.Instance.ResetNormalState();
+        SuperState.Instance.ResetSuperState();
     }
 }

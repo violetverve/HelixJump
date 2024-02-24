@@ -20,7 +20,8 @@ public class LevelManager : MonoBehaviour {
         Instance = this;
 
         currentLevel = PlayerPrefs.GetInt(CURRENT_LEVEL, 1);
-        numberOfPlatforms = PlayerPrefs.GetInt(PLATFORMS_NUMBER, 3);
+
+        numberOfPlatforms = PlayerPrefs.GetInt(PLATFORMS_NUMBER, 20);
     }
 
     public int GetCurrentLevel() {

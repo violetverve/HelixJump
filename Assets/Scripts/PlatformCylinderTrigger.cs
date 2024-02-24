@@ -13,7 +13,9 @@ public class PlatformCylinderTrigger : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         ScoreManager.Instance.IncrementScore();
 
-        Ball.Instance.IncrementPlatformsPassedWithoutCollision();
+        if (Ball.Instance.GetState() is NormalState) {
+            NormalState.Instance.IncrementPlatformsPassedWithoutCollision();
+        }
 
         PlatformsManager.Instance.IncrementPlatformIndex();
         

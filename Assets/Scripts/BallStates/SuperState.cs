@@ -10,21 +10,29 @@ public class SuperState: IBallState {
 
     private SuperState() { }
 
-    public void HandleCollisionEnter(Ball ball, Collision collision)
-    {
+    public void HandleCollisionEnter(Ball ball, Collision collision) {
+
+    }
+
+    public void IncrementPlatformsHitWithSuper() {
+        platformsHitWithSuper++;
+
         if (platformsHitWithSuper == platformsHitWithSuperToNormal) {
-                        
-            ball.SetState(NormalState.Instance);
+
+            Ball.Instance.SetState(NormalState.Instance);
 
             platformsHitWithSuper = 0;
         }
     }
 
-    public void IncrementPlatformsHitWithSuper() {
-        platformsHitWithSuper++;
-    }
-
     public string GetStateName() {
         return stateName;
+    }
+
+    public void ResetPlatformsHitWithSuper() {
+        platformsHitWithSuper = 0;
+    }
+    public void ResetSuperState() {
+        ResetPlatformsHitWithSuper();
     }
 }

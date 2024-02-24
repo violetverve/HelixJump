@@ -12,14 +12,8 @@ public class HelixManager : MonoBehaviour {
     private readonly float levelDistance = 4f;
     private float yPos;
 
-    private void OnAwake() {
+    private void Awake() {
         Instance = this;
-        HelixGameManager.Instance.OnGameOver += HelixGameManager_OnGameOver;
-    }
-
-    private void HelixGameManager_OnGameOver(object sender, System.EventArgs e) {
-        DestroyLevels();
-        SpawnLevels();
     }
 
     private void Start() {

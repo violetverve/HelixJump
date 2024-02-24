@@ -12,7 +12,7 @@ public class ComboState : IBallState {
         PlatformDestruction platformDestruction = collision.gameObject.GetComponentInParent<PlatformDestruction>();
             
         platformDestruction?.DestroyPlatform();
-
+        
         ball.SetState(NormalState.Instance);
         
         ball.SetVelocity(Vector3.zero);
