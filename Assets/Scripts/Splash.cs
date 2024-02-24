@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Splash : MonoBehaviour {
 
+    [SerializeField] bool fadeWithTime = false;
     private CanvasGroup canvasGroup;
     private float timeToDestroy = 1f;
     private float timeToFade = 1f;
@@ -22,6 +23,8 @@ public class Splash : MonoBehaviour {
 
     private void Update() {
 
+        if (!fadeWithTime) return;
+
         switch (state) {
             case State.Idle:
                 timeToDestroy -= Time.deltaTime;
@@ -36,7 +39,6 @@ public class Splash : MonoBehaviour {
                 Destroy(gameObject);
                 break;
         }
-        
-
+    
     }
 }
