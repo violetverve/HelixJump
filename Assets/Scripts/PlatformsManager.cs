@@ -6,7 +6,6 @@ using System;
 public class PlatformsManager : MonoBehaviour {
     public static PlatformsManager Instance { get; private set; }
     public event EventHandler OnPlatformIndexChanged;
-
     private int currentPlatformIndex = 0;
 
     private void Awake() {

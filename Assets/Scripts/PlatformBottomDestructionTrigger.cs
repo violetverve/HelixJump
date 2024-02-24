@@ -10,7 +10,11 @@ private PlatformDestruction platformDestruction;
     }
 
     private void OnTriggerExit(Collider other) {
-        
+        if (Ball.Instance.GetState() is NormalState) {
+            NormalState.Instance.IncrementPlatformsPassedWithoutCollision();
+        }
+
+
         PlatformsManager.Instance.IncrementPlatformIndex();
 
         platformDestruction.DestroyPlatform();

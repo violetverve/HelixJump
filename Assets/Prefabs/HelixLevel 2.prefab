@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 791582308739302165}
   - component: {fileID: 7323764490317889292}
   - component: {fileID: 2886675375802811018}
-  - component: {fileID: 4048573493442283570}
+  - component: {fileID: 3585463901472710031}
   m_Layer: 0
   m_Name: PlatformBottomDestructionTrigger
   m_TagString: Untagged
@@ -140,7 +140,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &4048573493442283570
+--- !u!114 &3585463901472710031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8461233932277742820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bef49be02304cff4fb179eebfd42550b, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e9394f71f9497b42bb1e74a3c4ad520, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7532796786101587717

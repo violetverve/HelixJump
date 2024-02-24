@@ -20,10 +20,18 @@ public class ScoreManager : MonoBehaviour {
         maxScore = LevelManager.Instance.GetPlatformsNumber();
 
         LevelManager.Instance.OnLevelChanged += LevelManager_OnLevelChanged;
+        PlatformsManager.Instance.OnPlatformIndexChanged += PlatformsManager_OnPlatformIndexChanged;
+    }
+
+    private void PlatformsManager_OnPlatformIndexChanged(object sender, EventArgs e) {
+        if (PlatformsManager.Instance.GetCurrentPlatformIndex() > 1) {
+            IncrementScore();
+        } 
     }
 
     private void OnDestroy() {
         LevelManager.Instance.OnLevelChanged -= LevelManager_OnLevelChanged;
+        PlatformsManager.Instance.OnPlatformIndexChanged -= PlatformsManager_OnPlatformIndexChanged;
     }
 
     private void LevelManager_OnLevelChanged(object sender, EventArgs e) {

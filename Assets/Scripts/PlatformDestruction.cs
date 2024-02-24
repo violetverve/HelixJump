@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformDestruction : MonoBehaviour {
     private readonly float radius = 100f;
     private readonly float explosionForce = 1300f;
-    private readonly float destroyDelay = 2f;
+    private readonly float destroyDelay = 1f;
 
     [SerializeField] private Transform[] platformCylinderTransforms;
     public void DestroyPlatform() {
@@ -20,6 +20,9 @@ public class PlatformDestruction : MonoBehaviour {
             rb.useGravity = true;
             rb.isKinematic = false;
             rb.AddExplosionForce(explosionForce, explosionPosition, radius);
+
+            MeshCollider boxCollider = platformTransform.gameObject.GetComponent<MeshCollider>();
+            boxCollider.enabled = false;
         }
 
         StartCoroutine(DestroyAfterDelay(gameObject, destroyDelay));
