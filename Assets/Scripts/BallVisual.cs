@@ -8,8 +8,6 @@ public class BallVisual : MonoBehaviour {
     private static string SQUASH_TRIGGER = "Squashed";
     [SerializeField] private List<BallStateVisualSO> ballStateVisuals;
 
-    [SerializeField] private ParticleSystem hitPlatformParticleSystem;
-
     private Animator animator;
 
     private MeshRenderer meshRenderer;
@@ -39,8 +37,7 @@ public class BallVisual : MonoBehaviour {
     private void Ball_OnBallHitPlatform(object sender, Ball.BallHitPlatformEventArgs e) {
         animator.SetTrigger(SQUASH_TRIGGER);
 
-        hitPlatformParticleSystem.transform.position = e.position;
-        hitPlatformParticleSystem.Play();
+        ParticleSystemManager.Instance.PlayCollisionParticleSystem(e.position);
     }
 
     private void Ball_OnBallStateChanged(object sender, System.EventArgs e) {
