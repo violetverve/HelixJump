@@ -3501,6 +3501,7 @@ MonoBehaviour:
   - {fileID: 2371985516730573927, guid: bbc17250c82bc6849ba930acdf0f1910, type: 3}
   - {fileID: 7579788000415814207, guid: aa1b0d8fa4e61d1428a875cac10a5db1, type: 3}
   - {fileID: 3622617006696737328, guid: 3ddcfe3ca18ed7542a047d95678b7765, type: 3}
+  - {fileID: 7579788000415814207, guid: 148125295162eb048af0b78432423626, type: 3}
   helixTopLevel: {fileID: 2371985516730573927, guid: a10f8c6bd7ab31542b260f48de5a6cd2, type: 3}
   helixBottomLevel: {fileID: 2519232567490638034, guid: e2c74cdb97e38374d8622c65443cb15a, type: 3}
 --- !u!114 &1950296246
